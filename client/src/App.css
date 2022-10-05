@@ -1,0 +1,39 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.header{
+  text-align: center;
+}
+
+.spinner{
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-btn{
+  width: 23px;
+  height: 23px;
+  font-size: 15px;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name{
+  border-radius: 6px;
+  padding: 3px;
+  margin-right: 10px;
+  background: rgb(126, 135, 255);
+  color:white
+}
