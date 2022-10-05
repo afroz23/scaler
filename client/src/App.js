@@ -134,18 +134,6 @@ function App() {
     );
   }
 
-  const editInterview = (item) => {
-    setTitle(item.title);
-    const users = item.participants.map((user) => ({
-      label: user.name,
-      value: user._id,
-    }));
-    setSelected(users);
-    setStartDate(item.startTime);
-    setEndDate(item.endTime);
-    setEditId(item._id);
-  };
-
   function getDateAndTime(date) {
     let sDate =
       date.getDate() +
@@ -241,7 +229,6 @@ function App() {
                   <th>Participants</th>
                   <th>Start Time</th>
                   <th>End Time</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -257,7 +244,6 @@ function App() {
                   if (start.getTime() < today.getTime()) {
                     return;
                   }
-
                   return (
                     <tr key={item._id}>
                       <td>#</td>
@@ -279,14 +265,6 @@ function App() {
                         <br />
                         {eTime}
                       </td>
-                      <td>
-                        <div
-                          className="edit-btn"
-                          onClick={() => editInterview(item)}
-                        >
-                          <MdModeEditOutline />
-                        </div>
-                      </td>
                     </tr>
                   );
                 })}
@@ -302,5 +280,3 @@ function App() {
 }
 
 export default App;
-
-// Edit functionality add krni h
