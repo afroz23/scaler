@@ -29,9 +29,24 @@ function App() {
   const [loading2, setLoading2] = useState(true);
   const [disable, setDisable] = useState(false);
   const [sucess, setSucess] = useState(false);
+
   const [interviews, setInterviews] = useState([]);
+
+  const [filter, setFilter] = useState([]);
   const [count, setCount] = useState(0);
   const [editId, setEditId] = useState("");
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearch(value);
+    let x = interviews.filter(
+      (interview) =>
+        interview.title.slice(0, value.length).toLowerCase() ===
+        value.toLowerCase()
+    );
+    setFilter(x);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -52,7 +67,10 @@ function App() {
     setLoading2(true);
     axios
       .get(`${process.env.REACT_APP_URL}/api/interview/allinterview`)
-      .then((res) => setInterviews(res.data))
+      .then((res) => {
+        setInterviews(res.data);
+        setFilter(res.data);
+      })
       .catch((err) => setError("Something went wrong"))
       .finally(() => setLoading2(false));
   }, [count]);
@@ -153,6 +171,7 @@ function App() {
       parseInt(date.getMonth() + 1) +
       "-" +
       date.getFullYear();
+
     let sHour = date.getHours() === 0 ? "00" : date.getHours();
     let sMinute = date.getMinutes() === 0 ? "00" : date.getMinutes();
     let sTime = sHour + ":" + sMinute;
@@ -225,6 +244,11 @@ function App() {
             </Form>
           </Row>
           <br />
+          <input
+            name="search"
+            value={search}
+            onChange={(e) => handleSearch(e)}
+          />
           <div>
             <Alert variant="primary">Upcomming interviews</Alert>
           </div>
@@ -245,7 +269,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {interviews.map((item) => {
+                {filter.map((item) => {
                   let today = new Date();
 
                   let start = new Date(item.startTime);
@@ -302,4 +326,3 @@ function App() {
 }
 
 export default App;
-

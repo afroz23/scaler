@@ -1,5 +1,4 @@
 const Users = require("../models/Users");
-const Interview = require("../models/Interview");
 
 exports.createUser = (req, res) => {
   let reqData = req.body;

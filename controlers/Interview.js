@@ -13,6 +13,7 @@ exports.CreateInterview = async (req, res) => {
   }
 
   const currentTime = new Date().getTime();
+
   if (!reqBody.startTime && !reqBody.endTime) {
     return res.status(400).send("start and end time is required");
   } else if (!reqBody.startTime) {
@@ -152,4 +153,11 @@ exports.UpdateInterview = async (req, res) => {
       return res.send(result);
     }
   });
+};
+
+exports.DeleteInterview = async (req, res) => {
+  const { id } = req.body.params;
+  const Delete = await Interview.deleteOne(id);
+
+  res.status(200).send("user Deleted");
 };

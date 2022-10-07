@@ -8,7 +8,7 @@ const UsersSchema = new mongoose.Schema({
   interviews: [
     {
       type: ObjectId,
-      ref: "Create",
+      ref: "Interview",
     },
   ],
 });
